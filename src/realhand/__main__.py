@@ -7,7 +7,7 @@ def main():
     height = 600
     width = 900
 
-    video = Video(height = 600, width = 900)
+    video = Video(height = height, width = width)
     detector = handDetector(maxHands=1, detectionCon=0.8)
     window = DisplayWindow(show_FPS = True)
 
