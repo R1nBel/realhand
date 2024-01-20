@@ -11,22 +11,22 @@ def main():
     height = 600
     width = 900
 
-    video = Video(height = height, width = width)
+    video = Video()
     detector = handDetector(maxHands=1, detectionCon=0.8)
-    camera_window = DisplayWindow(show_FPS = True)
-    model_window = ModelWindow(width = width, height = height)
-
+    cameraWindow = DisplayWindow(show_FPS = True)
+    modelWindow = ModelWindow(width = width, height = height)
 
     while True:
         img = video.get_video_frame()
         img = detector.findHands(img)
 
         points = detector.findPosition(img)
+        cameraWindow.show_window(img)
+        modelWindow.display_frame()
 
-        camera_window.show_window(img)
-        model_window.display_frame()
-        if points.hand_exist:
-            model_window.drow_hand(points=points)
+        if detector.handExist:
+            modelWindow.drow_hand(points=points)
+            detector.handExist = False
 
 
 if __name__ == "__main__":

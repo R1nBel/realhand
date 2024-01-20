@@ -3,13 +3,10 @@ from pygame.locals import *
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
-k = 1
-verticies = (
-    (0+k, 0, 0),
-    (1+k, 0, 0),
-    (0.5+k, 0.75, 0),
-    (0.5+k, 0.3, 0.9),
-    )
+
+#verticies = [[355, 136, -0.10708111524581909], [358, 110, -0.14757897332310677], [357, 93, -0.16573325917124748], [353, 77, -0.1799609698355198]]
+
+verticies = [[3, 1, -1], [-1, 1, -1], [3, 3, -1], [5, 7, -1]]
 
 edges = (
     (0,1),
@@ -22,6 +19,7 @@ edges = (
 
 
 def Cube():
+    glLineWidth(10)
     glBegin(GL_LINES)
     for edge in edges:
         for vertex in edge:
@@ -34,11 +32,11 @@ def Cube():
 def main():
     pygame.init()
     display = (900,600)
-    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    pygame.display.set_mode(display, DOUBLEBUF|OPENGL,)
 
-    gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
+    gluPerspective(90, (display[0]/display[1]), 0.1, 50.0)
 
-    glTranslatef(0.0,0.0, -5)
+    glTranslatef(0, 0, -10)
 
     while True:
         for event in pygame.event.get():

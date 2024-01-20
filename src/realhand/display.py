@@ -5,8 +5,12 @@ class DisplayWindow():
     ОТОБРАЖЕНИЕ ВИДЕОПОТОКА
     """
     show_FPS = False
-    pTime = 0
-    cTime = 0
+    """
+    [bool]: ФЛАГ ОТОБРАЖЕНИЯ FPS
+    """
+
+    __pTime = 0
+    __cTime = 0
 
     def __init__(self, show_FPS=False):
         self.show_FPS = show_FPS
@@ -15,9 +19,10 @@ class DisplayWindow():
         """
         ПОДСЧЕТ FPS
         """
-        self.cTime = time.time()
-        self.fps = 1. / (self.cTime - self.pTime)
-        self.pTime = self.cTime
+
+        self.__cTime = time.time()
+        self.fps = 1. / (self.__cTime - self.__pTime)
+        self.__pTime = self.__cTime
 
     def show_window(self, img):
         """

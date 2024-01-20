@@ -4,35 +4,25 @@ class Video():
     """
     ВИДЕО С КАМЕРЫ УСТРОЙСТВА
     """
-    capture_id = 0
+    __capture_id = 0
     """
-    ИНДЕКС КАМЕРЫ
+    [int]: ИНДЕКС КАМЕРЫ
     """
-    width = 900
-    """
-    ШИРИНА ВИДЕО
-    """
-    height = 600
-    """
-    ВЫСОТА ВИДЕО
-    """
-    cap = None
+    __cap = None
     """
     ОБЪЕКТ КАМЕРЫ
     """
 
-    def __init__(self, capture_id = 0, width = 900, height = 600):
-        self.capture_id = capture_id
-        self.width = width
-        self.height = height
+    def __init__(self, capture_id = 0):
+        self.__capture_id = capture_id
 
-        self.cap = cv2.VideoCapture(0)
+        self.__cap = cv2.VideoCapture(self.__capture_id)
 
     def get_video_frame(self):
         """
         ЗАХВАТ ВИДЕО И ВОЗВРАТ КАДРА
         """
-        success, img = self.cap.read()
+        success, img = self.__cap.read()
         if success:
             img = cv2.flip(img, 1)
             return img
