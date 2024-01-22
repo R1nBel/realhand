@@ -132,18 +132,19 @@ class OpenGLWidget(QtW.QOpenGLWidget):
 class FrameWidget(QtW.QWidget):
     def __init__(self):
         super(FrameWidget, self).__init__()
+        self.central_widget = QtW.QWidget()
 
         self.image_label = QtW.QLabel(self)
         self.image_label.setAlignment(QtC.Qt.AlignCenter)
 
-        self.layout = QtW.QVBoxLayout(self)
+        self.layout = QtW.QVBoxLayout(self.central_widget)
         self.layout.addWidget(self.image_label)
 
 
     def update_frame(self, frame):
         h, w, ch = frame.shape
         bytes_per_line = ch * w
-        q_image = QtG.QImage(frame.data, w, h, bytes_per_line, QtG.QImage.Format_BGR888)
+        q_image = QtG.QImage(frame.data, w, h, bytes_per_line, QtG.QImage.Format_RGB888)
         pixmap = QtG.QPixmap.fromImage(q_image)
         self.image_label.setPixmap(pixmap)
 

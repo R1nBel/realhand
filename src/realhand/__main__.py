@@ -23,6 +23,7 @@ def main():
 
         points = detector.findPosition(img)
         cameraWindow.showWindow(img)
+        modelWindow.showVideoFrame(img)
 
         if detector.handExist:
             modelWindow.drowHand(points)
@@ -30,9 +31,6 @@ def main():
 
         if not modelWindow.windowEndStatus():
             exit()
-
-
-
 
 if __name__ == "__main__":
     main()
