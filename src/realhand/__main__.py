@@ -1,7 +1,7 @@
 from vid_getting import Video
 from hand_detecting import HandDetector
 from display import DisplayWindow
-from model_drawing import ModelWindow
+from gui_interface import ModelWindow
 
 def main():
     """
@@ -28,8 +28,9 @@ def main():
             modelWindow.drowHand(points)
             detector.handExist = False
 
-        if modelWindow.windowEndStatus():
+        if not modelWindow.windowEndStatus():
             exit()
+
 
 
 

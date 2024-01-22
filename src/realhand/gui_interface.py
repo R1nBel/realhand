@@ -37,8 +37,7 @@ class ModelWindow():
         """
         ПРОВЕРКА ЗАКРЫТИЯ ОКНА
         """
-        if not self.__window.status:
-            sys.exit()
+        return self.__window.status
 
 
 class Hand():
