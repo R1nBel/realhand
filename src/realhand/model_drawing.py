@@ -22,9 +22,9 @@ class ModelWindow():
 
         self.__app = QtW.QApplication(sys.argv)
         self.__window = MainWindow()
-        self.__window.setGeometry(0, 0, self.__width, self.__height)
+        self.__window.setGeometry(0, 0, int(self.__width*1.5), self.__height)
         self.__window.gl_widget.setGeometry(0, 0, self.__width, self.__height)
-        self.__window.setWindowTitle('OpenGL Animation with PyQt')
+        self.__window.setWindowTitle('REALHAND')
         self.__window.show()
 
     def drowHand(self, points = None):
@@ -38,7 +38,7 @@ class ModelWindow():
         ПРОВЕРКА ЗАКРЫТИЯ ОКНА
         """
         if not self.__window.status:
-            sys.exit(self.__app.exec_())
+            sys.exit()
 
 
 class Hand():
