@@ -34,6 +34,9 @@ class ModelWindow():
         self.__window.gl_widget.updatePos(points)
 
     def windowEndStatus(self):
+        """
+        ПРОВЕРКА ЗАКРЫТИЯ ОКНА
+        """
         if not self.__window.status:
             sys.exit(self.__app.exec_())
 
@@ -81,7 +84,7 @@ class OpenGLWidget(QtW.QOpenGLWidget):
     """
     __points = [[0, 0, 0]]*21
     """
-    КЛЮЧЕВЫЕ ТОЧКИ РУКИ
+    [arr[arr[int]]]: КЛЮЧЕВЫЕ ТОЧКИ РУКИ
     """
 
     def __init__(self, parent=None):
@@ -124,7 +127,15 @@ class OpenGLWidget(QtW.QOpenGLWidget):
 
 
 class MainWindow(QtW.QMainWindow):
+    """
+    ОСНОВНОЕ ОКНО ИНТЕРФЕЙСА
+    """
     status = True
+    """
+    [bool]: СОСТОЯНИЕ ОКНА\n
+    True = ОКНО ЗАПУЩЕНО\n
+    False ОКНО ЗАКРЫТО=
+    """
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -138,4 +149,7 @@ class MainWindow(QtW.QMainWindow):
         self.layout.addWidget(self.gl_widget)
 
     def closeEvent(self, event):
+        """
+        СОБЫТИЕ ЗАКРЫТИЯ ОКНА
+        """
         self.status = False
