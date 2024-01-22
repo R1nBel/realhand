@@ -15,7 +15,7 @@ class DisplayWindow():
     def __init__(self, show_FPS=False):
         self.show_FPS = show_FPS
 
-    def __detect_fps(self):
+    def __detectFps(self):
         """
         ПОДСЧЕТ FPS
         """
@@ -24,12 +24,12 @@ class DisplayWindow():
         self.fps = 1. / (self.__cTime - self.__pTime)
         self.__pTime = self.__cTime
 
-    def show_window(self, img):
+    def showWindow(self, img):
         """
         ОТОБРАЖЕНИЕ ОКНА
         """
         if self.show_FPS:
-            self.__detect_fps()
+            self.__detectFps()
             cv2.putText(img, str(int(self.fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,255), 3)
 
         cv2.imshow("Image", img)

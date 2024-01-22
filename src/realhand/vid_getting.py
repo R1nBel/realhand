@@ -18,7 +18,7 @@ class Video():
 
         self.__cap = cv2.VideoCapture(self.__capture_id)
 
-    def get_video_frame(self):
+    def getVideoFrame(self):
         """
         ЗАХВАТ ВИДЕО И ВОЗВРАТ КАДРА
         """

@@ -1,9 +1,7 @@
 import cv2
 import mediapipe as mp
-from mediapipe import solutions
-from mediapipe.framework.formats import landmark_pb2
 
-class handDetector():
+class HandDetector():
 	"""
 	РАСПОЗНАВАНИЕ РУКИ НА ИЗОБРАЖЕНИИ
 	"""
@@ -99,7 +97,7 @@ class handDetector():
 				xList.append(cx)
 				yList.append(cy)
 				zList.append(cz)
-				self.__lmList.append([cx*0.01, cy*(-0.01), cz])
+				self.__lmList.append([cx*0.03, cy*(-0.03), cz])
 				if draw:
 					cv2.circle(img, (cx, cy), 5, (255,0,255), cv2.FILLED)
 			xmin, xmax = min(xList), max(xList)

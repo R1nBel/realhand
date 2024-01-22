@@ -1,11 +1,11 @@
-import pygame
-from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from PyQt5 import QtWidgets as QtW
+import sys
 
 class ModelWindow():
     """
-    ОКНО ОТОБРАЖЕНИЯ МОДЕЛИ
+    ВЫЗОВ ОКНА ОТОБРАЖЕНИЯ МОДЕЛИ
     """
     __width = 900
     """
@@ -20,33 +20,22 @@ class ModelWindow():
         self.__width = width
         self.__height = height
 
-        pygame.init()
-        display = (self.__width, self.__height)
-        pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+        self.__app = QtW.QApplication(sys.argv)
+        self.__window = MainWindow()
+        self.__window.setGeometry(0, 0, self.__width, self.__height)
+        self.__window.gl_widget.setGeometry(0, 0, self.__width, self.__height)
+        self.__window.setWindowTitle('OpenGL Animation with PyQt')
+        self.__window.show()
 
-        gluPerspective(90, (display[0]/display[1]), 0.1, 50.0)
-
-        glLineWidth(3)
-        glTranslatef(0.0,0.0, -10)
-
-    def display_frame(self):
-        """
-        ОТОБРАЖЕНИЕ КАДРА ОКНА МОДЕЛИ
-        """
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-
-    def drow_hand(self, points):
+    def drowHand(self, points = None):
         """
         ОТРИСОВКА РУКИ
         """
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-        self.model = Hand(points)
-        self.model.draw()
-        pygame.display.flip()
-        pygame.time.wait(10)
+        self.__window.gl_widget.updatePos(points)
+
+    def windowEndStatus(self):
+        if not self.__window.status:
+            sys.exit(self.__app.exec_())
 
 
 class Hand():
@@ -84,3 +73,69 @@ class Hand():
             for vertex in edge:
                 glVertex3fv(self.verticies[vertex])
         glEnd()
+
+
+class OpenGLWidget(QtW.QOpenGLWidget):
+    """
+    ОКНО 3D ГРАФИКИ OPENGL
+    """
+    __points = [[0, 0, 0]]*21
+    """
+    КЛЮЧЕВЫЕ ТОЧКИ РУКИ
+    """
+
+    def __init__(self, parent=None):
+        super(OpenGLWidget, self).__init__(parent)
+
+    def initializeGL(self):
+        """
+        ИНИЦИАЛИЗАЦИЯ ОКНА
+        """
+        glClearColor(0.0, 0.0, 0.0, 1.0)
+
+    def resizeGL(self, w, h):
+        """
+        ФОРМИРОВАНИЕ ОКНА
+        """
+        glViewport(0, 0, w, h)
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluPerspective(90, w/h, 1, 100)
+
+    def paintGL(self):
+        """
+        ОТРИСОВКА ОКНА
+        """
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        glLineWidth(3)
+        glTranslatef(0.0,0.0, -10)
+
+        self.hand = Hand(self.__points)
+        self.hand.draw()
+
+    def updatePos(self, points):
+        """
+        ИЗМЕНЕНИЕ ПОЗИЦИИ МОДЕЛИ
+        """
+        self.__points = points
+        self.update()
+
+
+class MainWindow(QtW.QMainWindow):
+    status = True
+
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.central_widget = QtW.QWidget(self)
+        self.setCentralWidget(self.central_widget)
+
+        self.layout = QtW.QVBoxLayout(self.central_widget)
+
+        self.gl_widget = OpenGLWidget()
+        self.layout.addWidget(self.gl_widget)
+
+    def closeEvent(self, event):
+        self.status = False
