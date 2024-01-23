@@ -13,15 +13,16 @@ class Video():
     ОБЪЕКТ КАМЕРЫ
     """
 
-    def __init__(self, capture_id = 0):
-        self.__capture_id = capture_id
+    def __init__(self, captureId = 0):
+        self.__captureId = captureId
 
-        self.__cap = cv2.VideoCapture(self.__capture_id)
+        self.__cap = cv2.VideoCapture(self.__captureId)
 
     def getVideoFrame(self):
         """
         ЗАХВАТ ВИДЕО И ВОЗВРАТ КАДРА
         """
+
         success, img = self.__cap.read()
         if success:
             img = cv2.flip(img, 1)

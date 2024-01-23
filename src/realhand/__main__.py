@@ -1,7 +1,6 @@
 from vid_getting import Video
 from hand_detecting import HandDetector
-from display import DisplayWindow
-from gui_interface import ModelWindow
+from gui_interface import Display
 
 def main():
     """
@@ -13,8 +12,7 @@ def main():
 
     video = Video()
     detector = HandDetector(maxHands=1, detectionCon=0.8)
-    cameraWindow = DisplayWindow(show_FPS = True)
-    modelWindow = ModelWindow(width = width, height = height)
+    modelWindow = Display(width = width, height = height)
 
 
     while True:
@@ -22,8 +20,7 @@ def main():
         img = detector.findHands(img)
 
         points = detector.findPosition(img)
-        cameraWindow.showWindow(img)
-        modelWindow.showVideoFrame(img)
+        modelWindow.showVideoFrame(img, True)
 
         if detector.handExist:
             modelWindow.drowHand(points)

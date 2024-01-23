@@ -5,53 +5,10 @@ class HandDetector():
 	"""
 	РАСПОЗНАВАНИЕ РУКИ НА ИЗОБРАЖЕНИИ
 	"""
+
 	handExist = False
 	"""
 	[bool]: НАЛИЧИЕ РУКИ В КАДРЕ
-	"""
-	__mode = False
-	"""
-	[bool]: РЕЖИМ СТАТИЧЕСКОГО КАДРА
-	"""
-	__maxHands = 1
-	"""
-	[int]: МАКСИМАЛЬНОЕ КОЛИЧЕСТВО РУК В КАДРЕ
-	"""
-	__modelComplexity = None
-	"""
-	[int]: Сложность модели ориентира для рук: {0, 1}
-	"""
-	__detectionCon = None
-	"""
-	[float]: КОЭФФИЦИЕТ УСПЕШНОСТИ ОБНАРУЖЕНИЯ РУКИ
-	(ЧЕМ ВЫШЕ, ТЕМ БОЛЬШЕ ТРЕБОВАНИЙ К ЧЕТКОСТИ МОДЕЛИ)
-	{0:1}
-	"""
-	__trackCon = None
-	"""
-	[float]: КОЭФФИЦИЕТ УСПЕШНОСТИ ОТСЛЕЖИВАНИЯ ОРИЕНТИРОВ РУКИ
-	(ЧЕМ ВЫШЕ, ТЕМ БОЛЬШЕ ТРЕБОВАНИЙ К ЧЕТКОСТИ МОДЕЛИ)
-	{0:1}
-	"""
-	__mpHands = None
-	"""
-	МОДУЛЬ РУК
-	"""
-	__hands = None
-	"""
-	МОДУЛЬ РУКИ
-	"""
-	__mpDraw = None
-	"""
-	МОДУЛЬ ОРИЕНТИРОВ
-	"""
-	__results = None
-	"""
-	[arr[dict[float]]]: ВХОДНОЙ СПИСОК ОРИЕНТИРОВ РУКИ
-	"""
-	__lmList = None
-	"""
-	[arr[arr[float]]]: ВЫХОДНОЙ СПИСОК ОРИЕНТИРОВ РУКИ
 	"""
 
 	def __init__(self, mode=False, maxHands=1, modelComplexity=1, detectionCon=0.5, trackCon=0.5):
@@ -65,10 +22,12 @@ class HandDetector():
 		self.__hands = self.__mpHands.Hands(self.__mode, self.__maxHands, self.__modelComplexity, self.__detectionCon, self.__trackCon)
 		self.__mpDraw = mp.solutions.drawing_utils
 
+
 	def findHands(self, img, draw=True):
 		"""
     	ПОИСК РУК НА ИЗОБРАЖЕНИИ
     	"""
+
 		imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 		self.__results = self.__hands.process(imgRGB)
 
@@ -82,6 +41,7 @@ class HandDetector():
 		"""
 		РАСПОЗНОВАНИЕ РУКИ И ЕЕ СОСТАВЛЯЮЩИХ
 		"""
+
 		xList = []
 		yList = []
 		zList = []
