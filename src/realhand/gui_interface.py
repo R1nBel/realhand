@@ -25,7 +25,8 @@ class ModelWindow():
         self.__window.setGeometry(0, 0, int(self.__width), self.__height)
         self.__window.addModelWidget()
         self.__window.addVideoCaptureWidget()
-        self.__window.gl_widget.setGeometry(0, 0, self.__width, self.__height)
+        self.__window.gl_widget.setFixedSize(600, 600)
+
         self.__window.setWindowTitle('REALHAND')
         self.__window.show()
 
@@ -129,16 +130,13 @@ class OpenGLWidget(QtW.QOpenGLWidget):
         self.__points = points
         self.update()
 
+
 class FrameWidget(QtW.QWidget):
     def __init__(self):
         super(FrameWidget, self).__init__()
 
         self.image_label = QtW.QLabel(self)
         self.image_label.setAlignment(QtC.Qt.AlignCenter)
-
-        self.layout = QtW.QVBoxLayout(self)
-        self.layout.addWidget(self.image_label)
-
 
     def update_frame(self, frame):
         h, w, ch = frame.shape
@@ -164,7 +162,7 @@ class MainWindow(QtW.QMainWindow):
         super(MainWindow, self).__init__()
         self.central_widget = QtW.QWidget(self)
         self.setCentralWidget(self.central_widget)
-        self.layout = QtW.QVBoxLayout(self.central_widget)
+        self.layout = QtW.QHBoxLayout(self.central_widget)
 
     def addModelWidget(self):
 
@@ -175,6 +173,7 @@ class MainWindow(QtW.QMainWindow):
 
         self.video_widget = FrameWidget()
         self.layout.addWidget(self.video_widget)
+        self.layout.addWidget(self.video_widget.image_label)
 
 
     def closeEvent(self, event):
