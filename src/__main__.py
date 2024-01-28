@@ -1,6 +1,6 @@
-from vid_getting import Video
-from hand_detecting import HandDetector
-from gui_interface import Display
+from modules.vid_getting import Video
+from modules.hand_detecting import HandDetector
+from modules.gui_interface import Display
 
 def main():
     """
