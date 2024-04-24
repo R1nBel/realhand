@@ -1,13 +1,13 @@
 {
-    "version": "0.0.0",
-    "configurations": [
-        {
-            "name": "realhand",
-            "type": "python",
-            "request": "launch",
-            "program": "src/realhand/__main__.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        }
-    ]
+  "version": "0.0.0",
+  "configurations": [
+    {
+      "name": "realhand",
+      "type": "python",
+      "request": "launch",
+      "program": "src/__main__.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
 }
