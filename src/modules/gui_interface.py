@@ -88,7 +88,7 @@ class OpenGLWidget(QtW.QOpenGLWidget):
     ОКНО 3D ГРАФИКИ OPENGL
     """
 
-    __points = [[0, 0, 0]]*21
+    __points = [[0, 0, 0] for _ in range(21)]
     """
     [arr[arr[int]]]: КЛЮЧЕВЫЕ ТОЧКИ РУКИ
     """
